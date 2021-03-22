@@ -19,12 +19,8 @@
 
 
 
-
-
-
-
-
 ## address table
+
 | Column       | Type | Options       |
 | ------       | ---- | -------       |
 | postcode     | string |  null: false|
