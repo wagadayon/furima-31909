@@ -14,7 +14,8 @@
 - has_one :address
 - has_one :credit
 - has_many :items
-- has_many: comments
+- has_many :comments
+
 
 
 
