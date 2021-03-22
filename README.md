@@ -85,3 +85,8 @@
 | item_id | string  | null :false                     |
  
 - belongs_to : user
+
+
+
+
+
