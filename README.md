@@ -78,3 +78,12 @@
 
 - belongs_to: item
 - belongs_to: user
+
+
+## buy table
+| Column  | Type    | Options                         |
+| ------  | ----    | -------                         |
+| user_id | string  | null :false                     |
+| item_id | string  | null :false                     |
+ 
+- belongs_to : user
