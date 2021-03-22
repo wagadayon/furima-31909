@@ -11,8 +11,8 @@
 |  first_name_kana |  string  |  null: false      |
 |  birthday         |  date    |    null: false    |
 
-- has_one :address
-- has_one :credit
+- belongs_to :address
+- belongs_to :credit
 - has_many :items
 - has_many :comments
 
