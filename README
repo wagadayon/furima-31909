@@ -1,5 +1,4 @@
-## DB設計
-
+# furima-31909
 ## users table
 | Column           | Type     | Options                    |
 | ---------------- | ----     | -------                    |
@@ -85,3 +84,8 @@
 | item_id | string  | null :false                     |
  
 - belongs_to : user
+
+
+
+
+
