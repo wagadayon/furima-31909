@@ -43,7 +43,7 @@
 | Column          | Type   | Options                         |
 | ------          | ----   | -------                         |
 | name_id         | string | null: false                     |
-| explanation_id  | text   | null: false                       |
+| explanation_id  | text   | null: false                     |
 | brand_id        | string | null: false                     |
 | condition_id    | string | null: false                     |
 | postage_id      | date   | null: false                     |
