@@ -42,7 +42,7 @@
 ### item table
 | Column          | Type   | Options                         |
 | ------          | ----   | -------                         |
-| name            | string | null: false                     |
+| name_id         | string | null: false                     |
 | explanation_id  | text   | null: false                       |
 | brand_id        | string | null: false                     |
 | condition_id    | string | null: false                     |
