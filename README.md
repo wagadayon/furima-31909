@@ -10,7 +10,7 @@
 |  last_name_kana      |  string  |  null: false               |
 |  first_name_kana     |  string  |  null: false               |
 |  birthday            |  date    |  null: false               |
-|  encrypted_password  |  string  |  null: false, unique: true |
+|  encrypted_password  |  string  |  null: false,              |
 
 
 - has_many :items
@@ -21,14 +21,15 @@
 
 ## addresses table
 
-| Column          | Type    | Options                   |
-| ------          | ----    | -------                   |
-| postcode        | string  | null: false               |
-| prefecture_id   | integer | null: false               |
-| municipality    | string  | null: false               |
-| address         | string  | null: false               |
-| room_number     | string  |                           |
-| phone_number    | string  | null: false, unique: true |
+| Column          | Type       | Options                   |
+| ------          | ----       | -------                   |
+| postcode        | string     | null: false               |
+| prefecture_id   | integer    | null: false               |
+| municipality    | string     | null: false               |
+| address         | string     | null: false               |
+| room_number     | string     |                           |
+| phone_number    | string     | null: false, unique: true |
+| buy             | references | null: false, unique: true |
 
 - belongs_to : buy
 
