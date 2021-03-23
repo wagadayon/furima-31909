@@ -1,33 +1,33 @@
 
 
 ## users table
-| Column           | Type     | Options                    |
-| ---------------- | ----     | -------                    |
-|  nickname        |  string  |  null: false               |
-|  email           |  string  |  null: false               |
-|  last_name       |  string  |  null: false               |
-|  first_name      |  string  |  null: false               |
-|  last_name_kana  |  string  |  null: false               |
-|  first_name_kana |  string  |  null: false               |
-|  birthday        |  date    |  null: false               |
-|  password        | string   |  null: false, unique: true |
+| Column               | Type     | Options                    |
+| ----------------     | ----     | -------                    |
+|  nickname            |  string  |  null: false               |
+|  email               |  string  |  null: false, unique: true |              
+|  last_name           |  string  |  null: false               |
+|  first_name          |  string  |  null: false               |
+|  last_name_kana      |  string  |  null: false               |
+|  first_name_kana     |  string  |  null: false               |
+|  birthday            |  date    |  null: false               |
+|  encrypted_password  |  string  |  null: false, unique: true |
 
-- belongs_to :credit
+
 - has_many :items
 - has_many :comments
 
 
 
-## address table
+## addresses table
 
-| Column          | Type    | Options     |
-| ------          | ----    | -------     |
-| postcode        | string  | null: false |
-| prefecture_id   | integer | null: false |
-| municipality    | string  | null: false |
-| address         | string  | null: false |
-| room_number     | string  |             |
-| phone           | string  | null: false |
+| Column          | Type    | Options                   |
+| ------          | ----    | -------                   |
+| postcode        | string  | null: false               |
+| prefecture_id   | integer | null: false               |
+| municipality    | string  | null: false               |
+| address         | string  | null: false               |
+| room_number     | string  |                           |
+| phone_number    | string  | null: false, unique: true |
 
 - belongs_to : buy
 
@@ -41,17 +41,16 @@
 | ------          | ----      | -------                         |
 | name            | string    | null: false                     |
 | explanation_id  | text      | null: false                     |
-| brand_id        | integer   | null: false                     |
 | condition_id    | integer   | null: false                     |
 | postage_id      | integer   | null: false                     |
 | area_id         | integer   | null: false                     |
-| price_id        | integer   | null: false                     |
+| price           | integer   | null: false                     |
 | day_id          | integer   | null:false                      |
-| user_id         | references| null: false, foregin_key : true |
+| user            | references| null: false, foregin_key : true |
 
 - belongs_to :user
 - has_many :comments
-- belongs_to : buy
+- has_one : buy
 
 
 
@@ -70,8 +69,8 @@
 ## buy table
 | Column  | Type       | Options                         |
 | ------  | ----       | -------                         |
-| user_id | references | null :false, foregin_key : true |
-| item_id | references | null :false, foregin_key : true |                   
+| user    | references | null :false, foregin_key : true |
+| item    | references | null :false, foregin_key : true |                   
  
 - belongs_to : user
 - belongs_to : item
