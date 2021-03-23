@@ -30,7 +30,7 @@
 | room_number     | string  |                           |
 | phone_number    | string  | null: false, unique: true |
 
-- belongs_to : buys
+- belongs_to : buy
 
 
 
@@ -41,18 +41,18 @@
 | Column          | Type      | Options                         |
 | ------          | ----      | -------                         |
 | name            | string    | null: false                     |
-| explanation_id  | text      | null: false                     |
-| condition       | integer   | null: false                     |
+| explanation     | text      | null: false                     |
+| condition_id    | integer   | null: false                     |
 | postage_id      | integer   | null: false                     |
 | area_id         | integer   | null: false                     |
 | price           | integer   | null: false                     |
 | day_id          | integer   | null:false                      |
 | user            | references| null: false, foregin_key : true |
-| category        | string    | null: false                     |
+| category_id     | integer   | null: false                     |
 
-- belongs_to :users
+- belongs_to :user
 - has_many :comments
-- has_one : buys
+- has_one : buy
 
 
 
@@ -64,8 +64,8 @@
 | user_id | integer | null: false, foregin_key : true |
 | comment | text    | null: false                      |
 
-- belongs_to: items
-- belongs_to: users
+- belongs_to: item
+- belongs_to: user
 
 
 ## buys table
@@ -74,6 +74,6 @@
 | user    | references | null :false, foregin_key : true |
 | item    | references | null :false, foregin_key : true |                   
  
-- belongs_to : users
-- belongs_to : items
-- has_one : addresses
+- belongs_to : user
+- belongs_to : item
+- has_one : address
