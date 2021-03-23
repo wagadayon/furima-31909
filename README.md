@@ -21,15 +21,15 @@
 
 ## addresses table
 
-| Column          | Type       | Options                   |
-| ------          | ----       | -------                   |
-| postcode        | string     | null: false               |
-| prefecture_id   | integer    | null: false               |
-| municipality    | string     | null: false               |
-| address         | string     | null: false               |
-| room_number     | string     |                           |
-| phone_number    | string     | null: false, unique: true |
-| buy             | references | null: false, unique: true |
+| Column          | Type       | Options                        |     
+| ------          | ----       | -------                        |    
+| postcode        | string     | null: false                    |   
+| prefecture_id   | integer    | null: false                    | 
+| municipality    | string     | null: false                    |
+| address         | string     | null: false                    | 
+| room_number     | string     |                                |  
+| phone_number    | string     | null: false, unique: true      | 
+| buy             | references | null: false, foregin_key: true |
 
 - belongs_to : buy
 
