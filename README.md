@@ -28,7 +28,7 @@
 | municipality    | string     | null: false                    |
 | address_number  | string     | null: false                    | 
 | room_number     | string     |                                |  
-| phone_number    | string     | null: false, unique: true      | 
+| phone_number    | string     | null: false                    | 
 | buy             | references | null: false, foregin_key: true |
 
 - belongs_to : buy
