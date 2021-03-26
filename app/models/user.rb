@@ -6,7 +6,7 @@ class User < ApplicationRecord
    
    validates :nickname, presence: true
    validates :email, presence: true
-   validates :password, presence: true, length: {minimum:7}
+   validates :encrypted_password, presence: true, length: {minimum:7}
 
    VALID_NAME_REGEX = /\A[ぁ-んァ-ン一-龥]/
    validates :family_name, :first_name, presence: true, format: { with: VALID_NAME_REGEX, message: "は全角で入力してください" }
