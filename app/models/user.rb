@@ -17,7 +17,8 @@ class User < ApplicationRecord
     validates :birth_day
     validates :password, length: { minimum: 6 }, format: { with: /\A[a-z0-9]+\z/i, message: "英数字文字6以上"}
 
-
+   end
+   
 
 
 end
