@@ -1,133 +1,99 @@
-rrequire 'rails_helper'
+require 'rails_helper'
+RSpec.describe User, type: :model do
 
-describe User do
-  describe '#create' do
+before do 
+  @user = FactoryBot.build{:user}
+end
 
-    # 1. nicknameが空では登録できないこと
-    it "is invalid without a nickname" do
-      user = build(:user, nickname: nil)
-      user.valid?
-      expect(user.errors[:nickname]).to include("can't be blank")
+describe "ユーザー新規登録" do
+  it "ニックネームが空では登録できない" do
+    @user.nickname = ""
+      @user.valid? 
+      expect(@user.errors.full_messages).to include("Nickname can't be blank") 
+  end
+
+  it "emailが空では登録できない" do
+    @user.email = ""  
+    @user.valid? 
+    expect(@user.errors.full_messages).to include("Email can't be blank") 
+   
+  end
+
+  it "passwordが空では登録できない" do
+    @user.password = ""
+    @user.valid? 
+    expect(@user.errors.full_messages).to include("Password can't be blank")
+  end
+
+    it "性が空だと登録できない" do
+      @user.family_name = ""
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Password can't be blank")
     end
 
-    # 2. emailが空では登録できないこと
-    it "is invalid without a email" do
-      user = build(:user, email: nil)
-      user.valid?
-      expect(user.errors[:email]).to include("can't be blank")
+    it "名が空だと登録できない" do
+      @user.first_name = ""
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Password can't be blank")
     end
 
-    # 3. passwordが空では登録できないこと
-    it "is invalid without a password" do
-      user = build(:user, password: nil)
+    it "性カナが空だと登録できない" do
+      @user.family_name_kana = ""
       user.valid?
-      expect(user.errors[:password]).to include("can't be blank")
+      expect(@user.errors.full_messages).to include("Password can't be blank")
     end
 
-    # 4. passwordが存在してもpassword_confirmationが空では登録できないこと
-    it "is invalid without a password_confirmation although with a password" do
-      user = build(:user, password_confirmation: "")
-      user.valid?
-      expect(user.errors[:password_confirmation]).to include("doesn't match Password")
+    it "名カナが空だと登録できない" do
+      @user.first_name_kana = ""
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Password can't be blank")
     end
 
-    # 5. nicknameが7文字以上であれば登録できないこと
-    it "is invalid with a nickname that has more than 7 characters " do
-      user = build(:user, nickname: "aaaaaaaa")
-      user.valid?
-      expect(user.errors[:nickname]).to include("is too long (maximum is 6 characters)")
+    it "パスワードと確認パスワードが一致していないと登録できない" do
+      @user.password_confirmation = ""
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Password can't be blank")
     end
 
-    # 6. nicknameが6文字以下では登録できること
-    it "is valid with a nickname that has less than 6 characters " do
-      user = build(:user, nickname: "abe")
-      expect(user).to be_valid
+    it "パスワードが7文字以上で登録できる" do
+      @user.password = ""
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Password can't be blank")
     end
 
-    # 7. 重複したemailが存在する場合登録できないこと
-    it "is invalid with a duplicate email address" do
-      user = create(:user)
-      another_user = build(:user, email: user.email)
-      another_user.valid?
-      expect(another_user.errors[:email]).to include("has already been taken")
+   
+
+    it "パスワードが7文字未満だと登録できない" do
+      @user.password = ""
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Password can't be blank")
+    end
+ 
+
+    it '性を半角で入力した時登録できない' do
+      @user.family_name = ""
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Password can't be blank")
+    end
+ 
+    it '名を半角で入力した時登録できない' do
+      @user.first_name = ""
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Password can't be blank")
     end
 
-    # 8. passwordが7文字以上であれば登録できること
-    it "is valid with a password that has more than 7 characters " do
-      user = build(:user, password: "0000000", password_confirmation: "0000000")
-      user.valid?
-      expect(user).to be_valid
+
+    it '性カナをカタカナ意外で入力した時登録できない' do
+      @user .family_name_kana = ""
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Password can't be blank")
     end
-
-    # 9. passwordが6文字以下であれば登録できないこと
-    it "is invalid with a password that has less than 6 characters " do
-      user = build(:user, password: "000000", password_confirmation: "000000")
-      user.valid?
-      expect(user.errors[:password]).to include("is too short (minimum is 7 characters)")
+ 
+    it '名カナをカタカナ意外で入力した時登録できない' do
+      @user.first_name_kana = ""
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Password can't be blank")
     end
-
-    # 10. last_nameが空では登録できないこと
-    it "is invalid without a last_name" do
-      user = build(:user, last_name: nil)
-      user.valid?
-      expect(user.errors[:last_name]).to include("can't be blank")
-    end
-
-    # 11. first_nameが空では登録できないこと
-    it "is invalid without a first_name" do
-      user = build(:user, first_name: nil)
-      user.valid?
-      expect(user.errors[:first_name]).to include("can't be blank")
-    end    
-
-    # 12. last_name_kanaが空では登録できないこと
-    it "is invalid without a last_name_kana" do
-      user = build(:user, last_name_kana: nil)
-      user.valid?
-      expect(user.errors[:last_name_kana]).to include("can't be blank")
-    end   
-
-    # 13. first_name_kanaが空では登録できないこと
-    it "is invalid without a first_name_kana" do
-      user = build(:user, first_name_kana: nil)
-      user.valid?
-      expect(user.errors[:first_name_kana]).to include("can't be blank")
-    end   
-
-    # 15. last_nameは半角では登録できないこと
-    it "is invalid without a last_name is full-width" do
-      user = build(:user, last_name: "aa")
-      user.valid?
-      expect(user.errors[:last_name]).to include("must be full-width")
-    end 
-
-    # 16. first_nameは半角では登録できないこと
-    it "is invalid without a first_name is full-width" do
-      user = build(:user, first_name: "aa")
-      user.valid?
-      expect(user.errors[:first_name]).to include("must be full-width")
-    end 
-
-    # 17. last_name_kanaは平仮名全角以外では登録できないこと
-    it "is invalid without a last_name_kana is full-width" do
-      user = build(:user, last_name_kana: "タロウ")
-      user.valid?
-      expect(user.errors[:last_name_kana]).to include("must be full-width")
-    end 
-
-    # 18. first_name_kanaは平仮名全角以外では登録できないこと
-    it "is invalid without a first_name_kana is full-width" do
-      user = build(:user, first_name_kana: "アベ")
-      user.valid?
-      expect(user.errors[:first_name_kana]).to include("must be full-width")
-    end 
-
-    # 19. passwordは英字と数字を組み合わせること
-    it "is valid with a password that Contains letters and numbers " do
-      user = build(:user, password: "a234567", password_confirmation: "a234567")
-      user.valid?
-      expect(user).to be_valid
-    end
-    
   end
 end
+
