@@ -29,33 +29,33 @@ RSpec.describe User, type: :model do
     it 'last_nameが空では登録できない' do
     @user.last_name = ''
     @user.valid?
-    expect(@user.errors[:last_name]).to include( "は、半角で入力して下さい")
+    expect(@user.errors[:last_name]).to include("can't be blank")
     
   end
 
   it 'first_nameが空では登録できない' do
     @user.first_name = ''
     @user.valid?
-    expect(@user.errors[:first_name]).to include( "は、半角で入力して下さい")
+    expect(@user.errors[:first_name]).to include( "can't be blank")
     
    end
 
     it 'last_name_kanaが空では登録できない' do
     @user.last_name_kana = ''
     @user.valid?
-    expect(@user.errors[:last_name_kana]).to include( "は、半角で入力して下さい。")
+    expect(@user.errors[:last_name_kana]).to include( "can't be blank")
   end
 
    it 'first_name_kanaが空では登録できない' do
     @user.first_name_kana = ''
     @user.valid?
-    expect(@user.errors[:first_name_kana]).to include( "は、半角で入力して下さい。")
+    expect(@user.errors[:first_name_kana]).to include("can't be blank")
    end
 
    it 'birthdayが空では登録できない' do
     @user.birthday = ''
     @user.valid?
-    expect(@user.errors[:birthday]).to include("は、半角で入力して下さい。")
+    expect(@user.errors[:birthday]).to include("can't be blank")
    end
 
    it 'passwordが空では登録できない' do
@@ -109,7 +109,7 @@ end
 it '確認パスワードを入力しないと登録できない' do
   @user.password_confirmation = ''
   @user.valid?
-  expect(@user.errors[:password]).to include("は、半角で入力して下さい。")
+  expect(@user.errors[:password]).to include("can't be blank")
 end
  end
 end
