@@ -109,7 +109,7 @@ end
 it '確認パスワードを入力しないと登録できない' do
   @user.password_confirmation = ''
   @user.valid?
-  expect(@user.errors[:password]).to include("can't be blank")
+  expect(@user.errors[:password_confirmation]).to include("doesn't match Password")
 end
  end
 end

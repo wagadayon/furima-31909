@@ -26,6 +26,9 @@ class User < ApplicationRecord
       with: /\A[\p{katakana}\p{blank}ー－]+\z/,
       message: 'は全角カナで入力して下さい。'
       }
+      
+      validates :birthday, presence: true
+      
 
    end
    
