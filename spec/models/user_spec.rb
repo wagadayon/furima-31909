@@ -62,16 +62,10 @@ RSpec.describe User, type: :model do
 end
   
   context "重複した場合登録できない時" do
-  it 'メールアドレスが重複した場合登録できない' do
-    @user.email = ''
-    @user.valid?
-    expect(@user.errors[:email]).to include("can't be blank")
-  end
-
   it '重複したemailが存在する場合登録できない' do
     @user.created_at
       @another_user = FactoryBot.build(:user)
-      @another_user.email = @user.email
+      @another_user.email 
       @another_user.valid?
       expect(@another_user.errors[:email]).to include("has already been taken")
   end
@@ -110,7 +104,7 @@ end
 end
 
 context "一致していないと登録できない時" do
-it 'パスワードとパスワード（確認用）、値の一致していない場合登録できないこと' do
+it 'passwordとpassword_confirmationの内容が違う場合に登録できない' do
   @user.password = ''
   @user.valid?
   expect(@user.errors[:password]).to include("is too short (minimum is 6 characters)", "英数字文字6以上")
@@ -118,7 +112,7 @@ end
 end
 
 context "確認パスワードを入力しない場合登録できない時" do
-it "確認パスワードを入力しないと登録できない"do
+it '確認パスワードを入力しないと登録できない'do
   @user.password_confirmation = ''
   @user.valid?
   expect(@user.errors[:password_confirmation]).to include("doesn't match Password")
