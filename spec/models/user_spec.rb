@@ -107,7 +107,7 @@ context "一致していないと登録できない時" do
 it 'passwordとpassword_confirmationの内容が違う場合に登録できない' do
   @user.password = ''
   @user.valid?
-  expect(@user.errors[:password]).to include("is too short (minimum is 6 characters)", "英数字文字6以上")
+  expect(@user.errors[:password]).to include("is long short (minimum is 6 characters)", "英数字文字6以上")
 end
 end
 
