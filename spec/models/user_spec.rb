@@ -80,7 +80,7 @@ end
 end
 
 context "数字の場合登録できない時" do
-it '数字のみでは登録できないこと' do
+it 'passwordは数字のみでは登録できないこと' do
   @user.password = ''
   @user.valid?
   expect(@user.errors[:password]).to include("is too short (minimum is 6 characters)", "英数字文字6以上")
@@ -88,7 +88,7 @@ end
 end
 
 context "英語の場合場合登録できない時" do
-it '英語のみでは登録できないこと' do
+it 'passwordは英語のみでは登録できないこと' do
   @user.password = ''
   @user.valid?
   expect(@user.errors[:password]).to include("is too short (minimum is 6 characters)", "英数字文字6以上")
@@ -96,7 +96,7 @@ end
 end
 
 context "半角文字でないと登録できない" do
-it '全角文字では登録できないこと' do
+it 'paswwordは全角文字では登録できないこと' do
   @user.password = ''
   @user.valid?
   expect(@user.errors[:password]).to include("is too short (minimum is 6 characters)", "英数字文字6以上")
