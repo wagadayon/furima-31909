@@ -131,6 +131,11 @@ end
  expect(@user.errors[:first_name_kana]).to include( "can't be blank")
 end
 end
+
+it '画像とテキストがあれば投稿できる' do
+  @user.valid?
+  expect(@user).to be_valid
+end
 end
 end
 end
