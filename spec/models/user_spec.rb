@@ -8,9 +8,12 @@ RSpec.describe User, type: :model do
       @another_user = FactoryBot.create(:user)
     end
 
+    context '保存できる場合' do
+      it "全ての項目の入力が存在すれば登録できること" do 
+        expect(@user).to be_valid
+      end
+     end
   
-
-
     context "空の値では登録できない時" do
     it 'nicknameが空では登録できない' do
       @user.nickname = ''
@@ -24,28 +27,35 @@ RSpec.describe User, type: :model do
       expect(@user.errors[:email]).to include("can't be blank")
     end
 
+    it "emailに一意性がないと登録できない" do
+      @user.save
+      @another_user = FactoryBot.build(:user)
+      @another_user.email = @user.email 
+      expect(@another_user.errors.full_messages).to include("Email has already been taken")
+    end
+
     it 'last_nameが空では登録できない' do
     @user.last_name = ''
     @user.valid?
-    expect(@user.errors[:last_name]).to include("can't be blank")
+    expect(@user.errors[:last_name]).to include("は、全角で入力して下さい")
     end
 
   it 'first_nameが空では登録できない' do
     @user.first_name = ''
     @user.valid?
-    expect(@user.errors[:first_name]).to include( "can't be blank")
+    expect(@user.errors[:first_name]).to include( "は、全角で入力して下さい")
     end
 
     it 'last_name_kanaが空では登録できない' do
     @user.last_name_kana = ''
     @user.valid?
-    expect(@user.errors[:last_name_kana]).to include( "can't be blank")
+    expect(@user.errors[:last_name_kana]).to include( "は全角カナで入力して下さい。")
    end
 
    it 'first_name_kanaが空では登録できない' do
     @user.first_name_kana = ''
     @user.valid?
-    expect(@user.errors[:first_name_kana]).to include("can't be blank")
+    expect(@user.errors[:first_name_kana]).to include("は全角カナで入力して下さい。")
     end
 
    it 'birthdayが空では登録できない' do
@@ -65,8 +75,7 @@ end
   it '重複したemailが存在する場合登録できない' do
     @user.created_at
       @another_user = FactoryBot.build(:user)
-      @another_user.email 
-      @another_user.valid?
+      @another_user.email = @user.email
       expect(@another_user.errors[:email]).to include("has already been taken")
   end
 end
@@ -122,19 +131,14 @@ context "半角カタカナの場合登録できない" do
   it 'last_name_kanaが半角カタカナでは登録できない' do
   @user.last_name_kana = ''
   @user.valid?
-  expect(@user.errors[:last_name_kana]).to include( "can't be blank")
+  expect(@user.errors[:last_name_kana]).to include( "は全角カナで入力して下さい。")
 end
 
   it 'first_name_kanaが半角カタカナでは登録できない' do
  @user.first_name_kana = ''
  @user.valid?
- expect(@user.errors[:first_name_kana]).to include( "can't be blank")
+ expect(@user.errors[:first_name_kana]).to include( "は全角カナで入力して下さい。")
 end
-end
-
-it '画像とテキストがあれば投稿できる' do
-  @user.valid?
-  expect(@user).to be_valid
 end
 end
 end
