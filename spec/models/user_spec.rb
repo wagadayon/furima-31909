@@ -81,30 +81,29 @@ end
 
 context "数字の場合登録できない時" do
 it 'passwordは数字のみでは登録できないこと' do
-  @user.password = ''
+  @user.password = '111111'
   @user.valid?
-  expect(@user.errors[:password]).to include("is too short (minimum is 6 characters)", "英数字文字6以上")
-end
+  expect(@user.errors[:password]).to include("には英字と数字の両方を含めて設定してください")
 end
 
 context "英語の場合場合登録できない時" do
 it 'passwordは英語のみでは登録できないこと' do
-  @user.password = ''
+  @user.password = 'aaaaaa'
   @user.valid?
-  expect(@user.errors[:password]).to include("is too short (minimum is 6 characters)", "英数字文字6以上")
+  expect(@user.errors[:password]).to include("には英字と数字の両方を含めて設定してください")
 end
 end
 
 context "半角文字でないと登録できない" do
 it 'paswwordは全角文字では登録できないこと' do
-  @user.password = ''
+  @user.password = 'AAAAAA'
   @user.valid?
-  expect(@user.errors[:password]).to include("is too short (minimum is 6 characters)", "英数字文字6以上")
+  expect(@user.errors[:password]).to include("には英字と数字の両方を含めて設定してください")
 end
 end
 
 context "一致していないと登録できない時" do
-it 'passwordとpassword_confirmationの内容が違う場合に登録できない' do
+it 'passwordとpassword_confirmationが一緒ではない場合に登録できない' do
   @user.password = ''
   @user.valid?
   expect(@user.errors[:password]).to include("is too short (minimum is 6 characters)", "英数字文字6以上")
@@ -118,10 +117,20 @@ it '確認パスワードを入力しないと登録できない'do
   expect(@user.errors[:password_confirmation]).to include("doesn't match Password")
  end
 end
+
+context "半角カタカナの場合登録できない" do
+  it 'last_name_kanaが半角カタカナでは登録できない' do
+  @user.last_name_kana = ''
+  @user.valid?
+  expect(@user.errors[:last_name_kana]).to include( "can't be blank")
+end
+
+  it 'first_name_kanaが半角カタカナでは登録できない' do
+ @user.first_name_kana = ''
+ @user.valid?
+ expect(@user.errors[:first_name_kana]).to include( "can't be blank")
 end
 end
-
-
-
-
-
+end
+end
+end
