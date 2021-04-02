@@ -10,7 +10,7 @@ class User < ApplicationRecord
    
 
    with_options presence: true do
-    validates :password, length: { minimum: 6 }, format: { with: /\A[a-z0-9]+\z/i, message: "英数字文字6以上"}
+    validates :password, length: { minimum: 6 }
     validates :nickname
     validates :birthday
    end
@@ -19,7 +19,7 @@ class User < ApplicationRecord
     validates :last_name
     validates :first_name
    end
-    with_options format: {   with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/, message: 'は全角カナで入力して下さい。'} do
+    with_options format: {   with:/\A[ァ-ヶー－]+\z/, message: 'は全角カナで入力して下さい。'} do
     validates :last_name_kana
     validates :first_name_kana
     end

@@ -60,33 +60,28 @@ RSpec.describe User, type: :model do
    it 'passwordが空では登録できない' do
    @user.password = ''
    @user.valid?
-   expect(@user.errors[:password]).to include("is too short (minimum is 6 characters)", "英数字文字6以上")
+   expect(@user.errors[:password]).to include("には英字と数字の両方を含めて設定してください")
   end
 end
 
-it "emailに一意性がないと登録できない" do
-  @user.created_at
-  @user = FactoryBot.create(:user)
-  @another_user.email = @user.email 
-  @another_user.valid?
-  expect(@another_user.errors.full_messages).to include("Email has already been taken")
-end
+
 
   context "重複した場合登録できない時" do
-  it '重複したemailが存在する場合登録できない' do
-    @user.created_at
-    @user = FactoryBot.create(:user)
-    @another_user.email = @user.email
-    @another_user.valid?
-    expect(@another_user.errors.full_messages).to include("Email has already been taken")
-  end
-end
+     it '重複したemailが存在する場合登録できない' do
+      @user.save
+      another_user = FactoryBot.build(:user)
+      another_user.email = @user.email
+      another_user.valid?
+      expect(another_user.errors.full_messages).to include('Email has already been taken')
+    end
+    end
+  
 
 context "文字数があってない場合登録できない" do
 it '5文字以下の場合登録できない' do
-  @user.password = ''
+  @user.password = 'a0000'
   @user.valid?
-  expect(@user.errors[:password]).to include("is too short (minimum is 6 characters)", "英数字文字6以上")
+  expect(@user.errors[:password]).to include("is too short (minimum is 6 characters)", "is too short (minimum is 6 characters)")
 end
 end
 
@@ -117,7 +112,7 @@ context "一致していないと登録できない時" do
 it 'passwordとpassword_confirmationが一緒ではない場合に登録できない' do
   @user.password = ''
   @user.valid?
-  expect(@user.errors[:password]).to include("is too short (minimum is 6 characters)", "英数字文字6以上")
+  expect(@user.errors[:password]).to include("には英字と数字の両方を含めて設定してください")
 end
 end
 
@@ -141,7 +136,22 @@ end
  @user.valid?
  expect(@user.errors[:first_name_kana]).to include( "は全角カナで入力して下さい。")
 end
+
+context '全角文字以外では登録できない'
+it 'first_nameは全角文字以外では登録できない' do
+  @user.first_name = 'yamada'
+  @user.valid?
+  expect(@user.errors[:first_name]).to include( "は、全角で入力して下さい")
+end
+
+it 'last_nameは全角以外では登録できない' do
+  @user.last_name = 'tarou'
+  @user.valid?
+  expect(@user.errors[:last_name]).to include( "は、全角で入力して下さい")
 end
 end
 end
 end
+end
+
+
