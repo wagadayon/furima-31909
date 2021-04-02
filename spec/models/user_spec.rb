@@ -22,9 +22,9 @@ RSpec.describe User, type: :model do
     end
 
     it 'emailが空では登録できない' do
-      @user.email = '@'
+      @user.email = ''
       @user.valid?
-      expect(@user.errors[:email]).to include("is invalid")
+      expect(@user.errors[:email]).to include("can't be blank")
     end
 
     it 'last_nameが空では登録できない' do
@@ -74,7 +74,22 @@ end
       another_user.valid?
       expect(another_user.errors.full_messages).to include('Email has already been taken')
     end
-    end
+    
+    it 'emailには@を含む必要がある' do
+    @user.save
+      another_user = FactoryBot.build(:user)
+      another_user.email = @user.email
+      another_user.valid?
+      expect(another_user.errors.full_messages).to include('Email has already been taken')
+  end
+end
+
+
+     
+
+
+
+
   
 
 context "文字数があってない場合登録できない" do
@@ -149,9 +164,21 @@ it 'last_nameは全角以外では登録できない' do
   @user.valid?
   expect(@user.errors[:last_name]).to include( "は、全角で入力して下さい")
 end
-end
-end
-end
+
+context 'カタカナ以外の全角文字だと登録できないこと' do
+  it 'first_nameはカタカナ以外の全角文字登録できない' do
+  @user.first_name_kana = 'YAMADA'
+  @user.valid?
+  expect(@user.errors[:first_name_kana]).to include( "は全角カナで入力して下さい。")
 end
 
-
+it 'last_nameは全角以外では登録できない' do
+  @user.last_name_kana = 'TAROU'
+  @user.valid?
+  expect(@user.errors[:last_name_kana]).to include( "は全角カナで入力して下さい。")
+end
+end
+end
+end
+end
+end
