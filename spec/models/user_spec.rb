@@ -129,7 +129,7 @@ it '確認パスワードを入力しないと登録できない'do
  end
 end
 
-context "半角カタカナの場合登録できない" do
+context '半角カタカナの場合登録できない' do
   it 'last_name_kanaが半角カタカナでは登録できない' do
   @user.last_name_kana = ''
   @user.valid?
@@ -137,7 +137,7 @@ context "半角カタカナの場合登録できない" do
 end
 
   it 'first_name_kanaが半角カタカナでは登録できない' do
- @user.first_name_kana = ''
+ @user.first_name_kana = 'ﾔﾏﾀﾞ'
  @user.valid?
  expect(@user.errors[:first_name_kana]).to include( "は全角カナで入力して下さい。")
 end
