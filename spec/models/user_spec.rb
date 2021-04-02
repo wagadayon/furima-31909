@@ -22,9 +22,9 @@ RSpec.describe User, type: :model do
     end
 
     it 'emailが空では登録できない' do
-      @user.email = ''
+      @user.email = '@'
       @user.valid?
-      expect(@user.errors[:email]).to include("can't be blank")
+      expect(@user.errors[:email]).to include("is invalid")
     end
 
     it 'last_nameが空では登録できない' do
@@ -126,7 +126,7 @@ end
 
 context '半角カタカナの場合登録できない' do
   it 'last_name_kanaが半角カタカナでは登録できない' do
-  @user.last_name_kana = ''
+  @user.last_name_kana = 'ﾀﾛｳ'
   @user.valid?
   expect(@user.errors[:last_name_kana]).to include( "は全角カナで入力して下さい。")
 end
