@@ -27,13 +27,6 @@ RSpec.describe User, type: :model do
       expect(@user.errors[:email]).to include("can't be blank")
     end
 
-    it "emailに一意性がないと登録できない" do
-      @user.save
-      @another_user = FactoryBot.build(:user)
-      @another_user.email = @user.email 
-      expect(@another_user.errors.full_messages).to include("Email has already been taken")
-    end
-
     it 'last_nameが空では登録できない' do
     @user.last_name = ''
     @user.valid?
@@ -70,13 +63,22 @@ RSpec.describe User, type: :model do
    expect(@user.errors[:password]).to include("is too short (minimum is 6 characters)", "英数字文字6以上")
   end
 end
-  
+
+it "emailに一意性がないと登録できない" do
+  @user.created_at
+  @user = FactoryBot.create(:user)
+  @another_user.email = @user.email 
+  @another_user.valid?
+  expect(@another_user.errors.full_messages).to include("Email has already been taken")
+end
+
   context "重複した場合登録できない時" do
   it '重複したemailが存在する場合登録できない' do
     @user.created_at
-      @another_user = FactoryBot.build(:user)
-      @another_user.email = @user.email
-      expect(@another_user.errors[:email]).to include("has already been taken")
+    @user = FactoryBot.create(:user)
+    @another_user.email = @user.email
+    @another_user.valid?
+    expect(@another_user.errors.full_messages).to include("Email has already been taken")
   end
 end
 
