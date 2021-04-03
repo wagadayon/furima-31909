@@ -10,7 +10,7 @@
 |  last_name_kana      |  string  |  null: false               |
 |  first_name_kana     |  string  |  null: false               |
 |  birthday            |  date    |  null: false               |
-|  encrypted_password  |  string  |  null: false               |  
+|  password            |  string  |  null: false               |  
 
 
 - has_many :items
