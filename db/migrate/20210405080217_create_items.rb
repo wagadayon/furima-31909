@@ -4,13 +4,13 @@ class CreateItems < ActiveRecord::Migration[6.0]
 
       t.string          :name,              null: false
       t.text            :explanation,       null: false
-      t.condition_id    :integer,           null: false
-      t.postage_id      :integer,           null: false
-      t.area_is         :integer,           null: false
-      t.price           :integer,           null: false
-      t.day_id          :integer,           null: false
-      t.user            :references,        null: false, foregin_key: true    
-      t.category_id     :integer,           null: false
+      t.integer         :condition_id,      null: false
+      t.integer         :postage_id,        null: false
+      t.integer         :area_id,           null: false
+      t.integer         :price,             null: false
+      t.integer         :day_id,            null: false
+      t.references      :user,              null: false, foregin_key: true    
+      t.integer         :category_id,       null: false
       t.timestamps
     end
   end
