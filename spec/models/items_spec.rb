@@ -24,13 +24,13 @@ RSpec.describe Item, type: :model do
       end
 
       it '商品名がない場合出品できない' do
-        @item.title = ''
+        @item.name = ''
         @item.valid?
-        expect(@item.errors.full_messages).to include("Title can't be blank")
+        expect(@item.errors.full_messages).to include("Name can't be blank")
       end
 
       it '商品の説明がない場合出品できない' do
-        @item.description = ''
+        @item.explanation  = ''
         @item.valid?
         expect(@item.errors.full_messages).to include("Description can't be blank")
       end
@@ -42,13 +42,13 @@ RSpec.describe Item, type: :model do
       end
 
       it '商品の状態idが1の時出品できない' do
-        @item.state_id = 1
+        @item.condition_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include('State must be other than 1')
       end
 
       it '配送料idが1の時出品できない' do
-        @item.fee_id = 1
+        @item.postage_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include('Fee must be other than 1')
       end
