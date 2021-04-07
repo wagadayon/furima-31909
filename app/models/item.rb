@@ -7,27 +7,31 @@ class Item < ApplicationRecord
   belongs_to :category
   belongs_to :postage
   belongs_to :area
-  belongs_to :day
+  belongs_to :delivery
+  has_one_attached :image
+  belongs_to :user
 
  with_options presence: true do
   validates :name
   validates :area_id
-  validates :day_id
+  validates :delivery_id
   validates :postage_id
   validates :explanation
   validates :condition_id
   validates :category_id
   validates :price
-  validates :user
+  validates :image
+ 
   
 end
 
 with_options numericality: {other_than: 1 } do
  validates :price
- validates :day_id
+ validates :delivery_id
  validates :area_id
  validates :postage_id
  validates :condition_id
+ validates :category_id
 
 end
 
