@@ -47,9 +47,8 @@ end
     #   @item = Item.find(params:id)
     # end
 
-
     def item_params
-      params.require(:item).permit(:name, :explanation, :condition_id, :postage_id, :area_id, :price, :delivery_id, :user, :category_id)
+      params.require(:item).permit(:name, :explanation, :condition_id, :postage_id, :area_id, :price, :delivery_id,  :category_id).merge(user_id: current_user.id)
     end
 
     # def move_to_index
