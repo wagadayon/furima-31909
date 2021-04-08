@@ -134,7 +134,7 @@
             <div class='item-img-content'>
               <%= link_to item_path(item.id) do%>
                 <%= image_tag item.image.variant(resize: '200x200'), class: '#' if item.image.attached? %>
-                <% if item.purchase.present? %>
+                <%# <% if item.purchase.present? %> %>
                   <div class='sold-out'>
                     <span>Sold Out!!</span>
                   </div>
@@ -156,7 +156,7 @@
           </li>
         <% end %>
       <% end %>
-      
+
        <% if @items.length == 0 %>
       <li class='list'>
         <%= link_to '#' do %>
