@@ -10,6 +10,7 @@ class Item < ApplicationRecord
   belongs_to :delivery
   has_one_attached :image
   belongs_to :user
+  belongs_to :condition
 
  with_options presence: true do
   validates :name
