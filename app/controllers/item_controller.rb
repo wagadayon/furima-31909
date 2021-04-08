@@ -1,5 +1,5 @@
 class ItemController < ApplicationController
-  # before_action :auteuticate_user!, only:[:new, :create, :edit, :update]
+  before_action :auteuticate_user!, only:[:new, :create, :edit, :update]
   # before_action :set_item, only: [:show, :edit, :update, :destroy]
   # before_action :move_to_index, only: [:edit, :update, :destroy]
   
@@ -52,9 +52,9 @@ end
       params.require(:item).permit(:name, :explanation, :condition_id, :postage_id, :area_id, :price, :delivery_id, :user, :category_id)
     end
 
-    def move_to_index
-      redirect_to root_path unless current_user.id == @item.user_id && @item.purchase.nil?
-    end
+    # def move_to_index
+    #   redirect_to root_path unless current_user.id == @item.user_id && @item.purchase.nil?
+    # end
 
     
 

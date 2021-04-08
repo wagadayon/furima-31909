@@ -97,7 +97,7 @@ RSpec.describe Item, type: :model do
       end
 
       it '価格が半角英語だけでの入力の時出品出来ない' do
-        @item.price = 'ab4567'
+        @item.price = 'abcdef'
         @item.valid?
         expect(@item.errors.full_messages).to include('Price is not a number')
       end
