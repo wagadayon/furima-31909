@@ -34,6 +34,10 @@ with_options numericality: {other_than: 1 } do
 
 end
 
+with_options numericality: { greater_than_or_equal_to: 300 } do
+  validates :price
+end
+
 
 with_options numericality: {less_than_or_equal_to: 9999999} do
 validates :price
@@ -43,5 +47,6 @@ end
   validates :price
  end
 end
+
     
   
