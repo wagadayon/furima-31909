@@ -66,7 +66,7 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include('Delivery must be other than 1')
       end
 
-      it '価格が全角平仮名での入力の出品時できない' do
+      it '価格が全角平仮名での入力の時出品できない' do
         @item.price = 'あいう'
         @item.valid?
         expect(@item.errors.full_messages).to include('Price is not a number')

@@ -26,7 +26,6 @@ class Item < ApplicationRecord
 end
 
 with_options numericality: {other_than: 1 } do
- validates :price
  validates :delivery_id
  validates :area_id
  validates :postage_id
@@ -35,9 +34,6 @@ with_options numericality: {other_than: 1 } do
 
 end
 
-with_options  numericality: {greater_than_or_equal_to: 300} do
-validates :price
-end
 
 with_options numericality: {less_than_or_equal_to: 9999999} do
 validates :price
