@@ -47,7 +47,7 @@
 | postage_id      | integer   | null: false                     |
 | area_id         | integer   | null: false                     |
 | price           | integer   | null: false                     |
-| day_id          | integer   | null:false                      |
+| delivery_id          | integer   | null:false                      |
 | user            | references| null: false, foregin_key : true |
 | category_id     | integer   | null: false                     |
 

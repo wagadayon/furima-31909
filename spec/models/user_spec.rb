@@ -37,7 +37,7 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors[:first_name]).to include('は、全角で入力して下さい')
       end
-
+  
       it 'last_name_kanaが空では登録できない' do
         @user.last_name_kana = ''
         @user.valid?
