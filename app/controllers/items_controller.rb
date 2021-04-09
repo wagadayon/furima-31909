@@ -28,12 +28,12 @@ end
     end
     
 
-    # def update
-    #   if @item.updatedef(item_params)
-    #     redirect_to  item_path
-    #   else
-    #     render :edit
-    #   end
+    def update
+      if @item.updatedef(item_params)
+        redirect_to  item_path
+      else
+        render :edit
+      end
       
     #   def destroy
     #     if @item.destroy
