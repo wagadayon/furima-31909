@@ -15,7 +15,7 @@
 
 - has_many :items
 - has_many :comments
-- has_many :buys
+- has_many :purchases
 
 
 
@@ -31,7 +31,7 @@
 | phone_number    | string     | null: false                    | 
 | buy             | references | null: false, foregin_key: true |
 
-- belongs_to : buy
+- belongs_to : purchases
 
 
 
@@ -53,7 +53,7 @@
 
 - belongs_to :user
 - has_many :comments
-- has_one : buy
+- has_one : purchases
 
 
 
@@ -69,7 +69,7 @@
 - belongs_to: user
 
 
-## buys table
+## purchases table
 | Column  | Type       | Options                         |
 | ------  | ----       | -------                         |
 | user    | references | null :false, foregin_key : true |

@@ -7,7 +7,7 @@ app/assets/stylesheets/items/new.css %>
    </header>
   <div class="items-sell-main">
     <h2 class="items-sell-title">商品の情報を入力</h2>
-    <%= form_with (model: @item, local: true do) |f| %>
+    <%= form_with model: @item, local: true do |f| %>
 
     <%= render 'shared/error_messages', model: f.object %> 
 
@@ -18,7 +18,7 @@ app/assets/stylesheets/items/new.css %>
         出品画像
         <span class="indispensable">必須</span>
       </div>
-      <div class="click-upload"> %>
+      <div class="click-upload"> 
          <p>
           クリックしてファイルをアップロード
         </p>
@@ -47,7 +47,7 @@ app/assets/stylesheets/items/new.css %>
     <div class="items-detail">
       <div class="weight-bold-text">商品の詳細</div>
       <div class="form">
-        <div class="weight-bold-text"> %>
+        <div class="weight-bold-text"> 
           <%# カテゴリー %>
           <span class="indispensable">必須</span>
         </div>
@@ -72,7 +72,7 @@ app/assets/stylesheets/items/new.css %>
           配送料の負担
           <span class="indispensable">必須</span>
         </div>
-        <%= f.collection_select(:post_age, Postage.all, :id, :postage, {}, {class:"select-box", id:"item-shipping-fee-status"}) %>
+        <%= f.collection_select(:postage_id, Postage.all, :id, :postage, {}, {class:"select-box", id:"item-shipping-fee-status"}) %>
          <div class="weight-bold-text">
           発送元の地域
           <span class="indispensable">必須</span>
@@ -92,10 +92,17 @@ app/assets/stylesheets/items/new.css %>
       <div class="weight-bold-text question-text">
         <span>販売価格<br>(¥300〜9,999,999)</span>
         <a class="question" href="#">?</a>
-      </div> %>
- 
-         <div class=
-        "price-content">
+      </div>
+      <div>
+        <div class="price-content">
+          <div class="price-text">
+            <span>価格</span>
+            <span class="indispensable">必須</span>
+          </div>
+          <span class="sell-yen">¥</span>
+          <%= f.text_field :price, class:"price-input", id:"item-price", placeholder:"例）300" %>
+        </div>
+        <div class="price-content">
           <span>販売手数料 (10%)</span>
           <span>
             <span id='add-tax-price'></span>円
@@ -108,8 +115,8 @@ app/assets/stylesheets/items/new.css %>
           </span>
         </div>
       </div>
-    </div> %>
-    /販売価格 %>
+    </div>
+    <%# /販売価格  %>
 
     <%# 注意書き %>
     <div class="caution">
