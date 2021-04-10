@@ -27,9 +27,9 @@
 | area_id         | integer    | null: false                    | 
 | municipality    | string     | null: false                    |
 | address_number  | string     | null: false                    | 
-| room_number     | string     |                                |  
+| room_nume       | string     |                                |  
 | phone_number    | string     | null: false                    | 
-| buy             | references | null: false, foregin_key: true |
+| purchase          | references | null: false, foregin_key: true |
 
 - belongs_to : purchases
 
