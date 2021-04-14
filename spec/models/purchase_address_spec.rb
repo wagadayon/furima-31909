@@ -34,37 +34,37 @@ RSpec.describe  PurchaseAddress, type: :model do
       it '郵便番号が空の場合購入できない' do
         @purchase_address.postcode = nil
         @purchase_address.valid?
-        expect(@purchase_address.errors.full_messages).to include("Postcode Postal code Input correctly")
+        expect(@purchase_address.errors.full_messages).to include("Post code Input correctly")
       end
 
       it '郵便番号に平仮名が含まれていると購入できない' do
         @purchase_address.postcode = 'あいうえお'
         @purchase_address.valid?
-        expect(@purchase_address.errors.full_messages).to include("Postcode Postal code Input correctly")
+        expect(@purchase_address.errors.full_messages).to include("Post code Input correctly")
       end
 
       it '郵便番号にカタカタが含まれていると購入できない' do
         @purchase_address.postcode = 'アイウエオ'
         @purchase_address.valid?
-        expect(@purchase_address.errors.full_messages).to include("Postcode Postal code Input correctly")
+        expect(@purchase_address.errors.full_messages).to include("Post code Input correctly")
       end
 
       it '郵便番号に漢字が含まれていると購入できない' do
         @purchase_address.postcode = '亜意于絵尾'
         @purchase_address.valid?
-        expect(@purchase_address.errors.full_messages).to include("Postcode Postal code Input correctly")
+        expect(@purchase_address.errors.full_messages).to include("Post code Input correctly")
       end
 
       it '郵便番号に英字が含まれていると購入できない' do
         @purchase_address.postcode = 'aiueo'
         @purchase_address.valid?
-        expect(@purchase_address.errors.full_messages).to include("Postcode Postal code Input correctly")
+        expect(@purchase_address.errors.full_messages).to include("Post code Input correctly")
       end
 
       it '郵便番号に-が含まれていないと購入できない' do
         @purchase_address.postcode = '1234567'
         @purchase_address.valid?
-        expect(@purchase_address.errors.full_messages).to include("Postcode Postal code Input correctly")
+        expect(@purchase_address.errors.full_messages).to include("Post code Input correctly")
       end
 
       it '都道府県のカテゴリーidが1の時購入できない' do
@@ -120,7 +120,7 @@ RSpec.describe  PurchaseAddress, type: :model do
       it 'tokenが空の時購入できない' do
         @purchase_address.token = nil
         @purchase_address.valid?
-        expect(@purchase_address.errors.full_messages).to include("Token can't be blank")
+        expect(@purchase_address.errors.full_messages).to include(" Can't be blank")
       end
     end
   end
