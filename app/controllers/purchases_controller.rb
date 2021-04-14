@@ -4,11 +4,11 @@ class PurchasesController < ApplicationController
   before_action :move_to_index, only: [:index]
 
   def index
-    @purchase_address = Address.new
+    @purchase_address = PurchaseAddress.new
   end
 
   def create
-    @purchase_address = Address.new(purchases_address_params)
+    @purchase_address = PurchaseAddress.new(purchases_address_params)
    
      if @purchase_address.valid?
       pay_item
@@ -22,7 +22,7 @@ class PurchasesController < ApplicationController
   private
 
   def purchases_address_params
-    params.require(:address).permit(:postcode, :area_id, :municipality, :address, :room_number, :phone_number).merge(
+    params.require(:purchase_address).permit(:postcode, :area_id, :municipality, :address, :room_name, :phone_number).merge(
       user_id: current_user.id, item_id: params[:item_id], token: params[:token]
     )
   end
@@ -42,7 +42,7 @@ class PurchasesController < ApplicationController
   end
 
   def move_to_index
-    redirect_to root_path if current_user.id == @item.user_id && @item.purchases.nil?
+    redirect_to root_path if current_user.id == @item.user_id || !@item.purchase.nil?
   end
-end
+  end
 
