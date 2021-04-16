@@ -94,6 +94,7 @@ RSpec.describe  PurchaseAddress, type: :model do
       it '電話番号に-が含まれていたら購入できない' do
         @purchase_address.phone_number = '090-1234-5678'
         @purchase_address.valid?
+        expect(@purchase_address.errors.full_messages).to include("Phone number Phone number is invalid")
       end
 
       it '電話番号が11桁以内でないと購入できない' do
@@ -125,3 +126,4 @@ RSpec.describe  PurchaseAddress, type: :model do
     end
   end
 end
+
